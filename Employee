@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+class Employee {
+    private String name;
+    private double salary;
+    
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+    
+    public double calculateSalary() {
+        // Assuming the salary is calculated monthly
+        return salary / 12;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Taking input for the number of employees
+        System.out.print("Enter the number of employees: ");
+        int n = scanner.nextInt();
+        
+        // Creating an array to store Employee objects
+        Employee[] employees = new Employee[n];
+        
+        // Taking input for each employee's name and salary, and creating Employee objects
+        for (int i = 0; i < n; i++) {
+            scanner.nextLine(); // consume the newline character
+            System.out.print("Enter name of employee " + (i+1) + ": ");
+            String name = scanner.nextLine();
+            System.out.print("Enter salary of employee " + (i+1) + ": ");
+            double salary = scanner.nextDouble();
+            employees[i] = new Employee(name, salary);
+        }
+        
+        // Printing the name and calculated salary of each employee
+        for (int i = 0; i < n; i++) {
+            System.out.println((i+1) + ". " + employees[i].getName() + " - Salary: " + employees[i].calculateSalary());
+        }
+        
+        scanner.close();
+    }
+}
