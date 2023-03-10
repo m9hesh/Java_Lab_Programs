@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+//4. Write a program to demonstrate client-server environment using multithreading
 class Employee {
     private String name;
     private double salary;
