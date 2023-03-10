@@ -1,0 +1,31 @@
+//5.Write a program to demonstrate mutual exclusion using thread synchronization.
+
+import java.util.concurrent.locks.*;
+
+public class MutexDemo {
+
+    private static int counter = 0;
+    private static Lock lock = new ReentrantLock();
+
+    public static void main(String[] args) {
+        Thread thread1 = new Thread(new IncrementTask());
+        Thread thread2 = new Thread(new IncrementTask());
+        thread1.start();
+        thread2.start();
+    }
+
+    private static class IncrementTask implements Runnable {
+        @Override
+        public void run() {
+            for (int i = 0; i < 10000; i++) {
+                lock.lock(); // Acquire lock
+                try {
+                    counter++; // Critical section
+                } finally {
+                    lock.unlock(); // Release lock
+                }
+            }
+            System.out.println(Thread.currentThread().getName() + " completed. Counter = " + counter);
+        }
+    }
+}
